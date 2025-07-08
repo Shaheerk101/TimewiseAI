@@ -24,13 +24,17 @@ export default function HomePage() {
             tools designed for modern students.
           </p>
           <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-            <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
-              Start Learning Free
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-            <Button size="lg" variant="outline">
-              Watch Demo
-            </Button>
+            <Link href="/dashboard">
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+                Start Learning Free
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+            <Link href="/ai-assistant">
+              <Button size="lg" variant="outline">
+                Try AI Tutor
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -60,57 +64,69 @@ export default function HomePage() {
           </div>
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <CardHeader>
-                <Brain className="h-12 w-12 text-blue-600 mb-4" />
-                <CardTitle>AI Tutor</CardTitle>
-                <CardDescription>
-                  Get instant help with personalized explanations and step-by-step solutions
-                </CardDescription>
-              </CardHeader>
-            </Card>
+            <Link href="/ai-assistant">
+              <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+                <CardHeader>
+                  <Brain className="h-12 w-12 text-blue-600 mb-4" />
+                  <CardTitle>AI Tutor</CardTitle>
+                  <CardDescription>
+                    Get instant help with personalized explanations and step-by-step solutions
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
 
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <CardHeader>
-                <Calendar className="h-12 w-12 text-green-600 mb-4" />
-                <CardTitle>Smart Scheduling</CardTitle>
-                <CardDescription>
-                  AI-optimized study schedules that adapt to your learning pace and deadlines
-                </CardDescription>
-              </CardHeader>
-            </Card>
+            <Link href="/calendar">
+              <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+                <CardHeader>
+                  <Calendar className="h-12 w-12 text-green-600 mb-4" />
+                  <CardTitle>Smart Scheduling</CardTitle>
+                  <CardDescription>
+                    AI-optimized study schedules that adapt to your learning pace and deadlines
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
 
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <CardHeader>
-                <Users className="h-12 w-12 text-purple-600 mb-4" />
-                <CardTitle>Study Groups</CardTitle>
-                <CardDescription>Connect with classmates and form collaborative study groups</CardDescription>
-              </CardHeader>
-            </Card>
+            <Link href="/study-groups">
+              <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+                <CardHeader>
+                  <Users className="h-12 w-12 text-purple-600 mb-4" />
+                  <CardTitle>Study Groups</CardTitle>
+                  <CardDescription>Connect with classmates and form collaborative study groups</CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
 
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <CardHeader>
-                <BookOpen className="h-12 w-12 text-orange-600 mb-4" />
-                <CardTitle>Smart Flashcards</CardTitle>
-                <CardDescription>Spaced repetition flashcards that adapt to your memory patterns</CardDescription>
-              </CardHeader>
-            </Card>
+            <Link href="/flashcards">
+              <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+                <CardHeader>
+                  <BookOpen className="h-12 w-12 text-orange-600 mb-4" />
+                  <CardTitle>Smart Flashcards</CardTitle>
+                  <CardDescription>Spaced repetition flashcards that adapt to your memory patterns</CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
 
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <CardHeader>
-                <Target className="h-12 w-12 text-red-600 mb-4" />
-                <CardTitle>Goal Tracking</CardTitle>
-                <CardDescription>Set and track academic goals with detailed progress analytics</CardDescription>
-              </CardHeader>
-            </Card>
+            <Link href="/grades">
+              <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+                <CardHeader>
+                  <Target className="h-12 w-12 text-red-600 mb-4" />
+                  <CardTitle>Goal Tracking</CardTitle>
+                  <CardDescription>Set and track academic goals with detailed progress analytics</CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
 
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <CardHeader>
-                <Zap className="h-12 w-12 text-yellow-600 mb-4" />
-                <CardTitle>Quick Answers</CardTitle>
-                <CardDescription>Instant answers to your questions with AI-powered explanations</CardDescription>
-              </CardHeader>
-            </Card>
+            <Link href="/ai-assistant">
+              <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+                <CardHeader>
+                  <Zap className="h-12 w-12 text-yellow-600 mb-4" />
+                  <CardTitle>Quick Answers</CardTitle>
+                  <CardDescription>Instant answers to your questions with AI-powered explanations</CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
           </div>
         </div>
       </section>
@@ -231,17 +247,21 @@ export default function HomePage() {
             Join thousands of students who are already achieving their academic goals with TimeWise AI.
           </p>
           <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-            <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
-              Get Started Free
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
-            >
-              Schedule Demo
-            </Button>
+            <Link href="/dashboard">
+              <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
+                Get Started Free
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+            <Link href="/ai-assistant">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
+              >
+                Try AI Tutor
+              </Button>
+            </Link>
           </div>
           <p className="mt-4 text-sm text-blue-200">Free to start • Cancel anytime</p>
         </div>
@@ -252,10 +272,10 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-8 md:grid-cols-4">
             <div>
-              <div className="flex items-center mb-4">
+              <Link href="/" className="flex items-center mb-4">
                 <Brain className="h-8 w-8 text-blue-400 mr-2" />
                 <span className="text-xl font-bold">TimeWise AI</span>
-              </div>
+              </Link>
               <p className="text-gray-400">Empowering students with AI-driven learning tools for academic success.</p>
             </div>
 
@@ -263,22 +283,22 @@ export default function HomePage() {
               <h3 className="font-semibold mb-4">Product</h3>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <Link href="/ai-assistant" className="hover:text-white">
+                  <Link href="/ai-assistant" className="hover:text-white transition-colors">
                     AI Tutor
                   </Link>
                 </li>
                 <li>
-                  <Link href="/calendar" className="hover:text-white">
+                  <Link href="/calendar" className="hover:text-white transition-colors">
                     Smart Calendar
                   </Link>
                 </li>
                 <li>
-                  <Link href="/study-groups" className="hover:text-white">
+                  <Link href="/study-groups" className="hover:text-white transition-colors">
                     Study Groups
                   </Link>
                 </li>
                 <li>
-                  <Link href="/flashcards" className="hover:text-white">
+                  <Link href="/flashcards" className="hover:text-white transition-colors">
                     Flashcards
                   </Link>
                 </li>
@@ -289,22 +309,22 @@ export default function HomePage() {
               <h3 className="font-semibold mb-4">Resources</h3>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <Link href="/learn" className="hover:text-white">
+                  <Link href="/learn" className="hover:text-white transition-colors">
                     Learning Paths
                   </Link>
                 </li>
                 <li>
-                  <Link href="/community" className="hover:text-white">
+                  <Link href="/community" className="hover:text-white transition-colors">
                     Community
                   </Link>
                 </li>
                 <li>
-                  <Link href="/career" className="hover:text-white">
+                  <Link href="/career" className="hover:text-white transition-colors">
                     Career Center
                   </Link>
                 </li>
                 <li>
-                  <Link href="/mobile-app" className="hover:text-white">
+                  <Link href="/mobile-app" className="hover:text-white transition-colors">
                     Mobile App
                   </Link>
                 </li>
@@ -315,22 +335,22 @@ export default function HomePage() {
               <h3 className="font-semibold mb-4">Company</h3>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <Link href="/about" className="hover:text-white">
+                  <Link href="/dashboard" className="hover:text-white transition-colors">
                     About
                   </Link>
                 </li>
                 <li>
-                  <Link href="/contact" className="hover:text-white">
+                  <Link href="/dashboard" className="hover:text-white transition-colors">
                     Contact
                   </Link>
                 </li>
                 <li>
-                  <Link href="/privacy" className="hover:text-white">
+                  <Link href="/dashboard" className="hover:text-white transition-colors">
                     Privacy
                   </Link>
                 </li>
                 <li>
-                  <Link href="/terms" className="hover:text-white">
+                  <Link href="/dashboard" className="hover:text-white transition-colors">
                     Terms
                   </Link>
                 </li>

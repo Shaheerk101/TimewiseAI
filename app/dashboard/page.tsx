@@ -1,338 +1,414 @@
 "use client"
 
-import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
-import {
-  BookOpen,
-  Calendar,
-  TrendingUp,
-  Target,
-  Clock,
-  Users,
-  Brain,
-  Award,
-  ChevronRight,
-  Plus,
-  FlameIcon as Fire,
-  Star,
-} from "lucide-react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Link from "next/link"
+import { Brain, Calendar, BookOpen, Target, TrendingUp, Clock, Users, Award, ArrowRight } from "lucide-react"
 
-export default function StudentDashboard() {
-  const [studyStreak, setStudyStreak] = useState(7)
-  const [weeklyGoal, setWeeklyGoal] = useState(75)
-  const [currentProgress, setCurrentProgress] = useState(68)
-
-  // Mock data - replace with real data from your backend
-  const studentData = {
-    name: "Alex Johnson",
-    gpa: 3.7,
-    totalStudyHours: 142,
-    coursesEnrolled: 5,
-    upcomingSessions: 3,
-    achievements: 12,
-  }
-
-  const recentCourses = [
-    { name: "Calculus II", grade: "A-", progress: 85, nextAssignment: "Problem Set 7", dueDate: "Tomorrow" },
-    { name: "Computer Science", grade: "B+", progress: 78, nextAssignment: "Final Project", dueDate: "Dec 15" },
-    { name: "Physics", grade: "A", progress: 92, nextAssignment: "Lab Report", dueDate: "Friday" },
-    { name: "Chemistry", grade: "B", progress: 71, nextAssignment: "Midterm Exam", dueDate: "Next Week" },
-  ]
-
-  const upcomingEvents = [
-    { type: "Tutoring", subject: "Math", time: "2:00 PM", tutor: "Sarah Chen" },
-    { type: "Study Group", subject: "Physics", time: "4:30 PM", members: 4 },
-    { type: "AI Session", subject: "Chemistry", time: "7:00 PM", topic: "Organic Reactions" },
-  ]
-
-  const studyInsights = [
-    { metric: "Most Productive Time", value: "2-4 PM", trend: "+15%" },
-    { metric: "Favorite Subject", value: "Mathematics", trend: "45 hrs" },
-    { metric: "Study Efficiency", value: "87%", trend: "+12%" },
-    { metric: "Weekly Average", value: "18.5 hrs", trend: "+3.2 hrs" },
-  ]
-
+export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">Welcome back, {studentData.name}! 👋</h1>
-              <p className="text-gray-600">Here's your academic progress overview</p>
-            </div>
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2 bg-orange-100 px-3 py-2 rounded-full">
-                <Fire className="h-4 w-4 text-orange-600" />
-                <span className="text-sm font-semibold text-orange-800">{studyStreak} day streak!</span>
-              </div>
-              <Link href="/ai-assistant">
-                <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600">
-                  <Brain className="h-4 w-4 mr-2" />
-                  Ask AI
-                </Button>
-              </Link>
-            </div>
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome back, Student!</h1>
+            <p className="text-gray-600">Here's your learning progress and upcoming tasks</p>
           </div>
-        </div>
 
-        {/* Quick Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
-          <Card className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
-            <CardContent className="p-4 text-center">
-              <TrendingUp className="h-6 w-6 mx-auto mb-2" />
-              <div className="text-2xl font-bold">{studentData.gpa}</div>
-              <div className="text-xs opacity-90">Current GPA</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gradient-to-r from-green-500 to-green-600 text-white">
-            <CardContent className="p-4 text-center">
-              <Clock className="h-6 w-6 mx-auto mb-2" />
-              <div className="text-2xl font-bold">{studentData.totalStudyHours}</div>
-              <div className="text-xs opacity-90">Study Hours</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gradient-to-r from-purple-500 to-purple-600 text-white">
-            <CardContent className="p-4 text-center">
-              <BookOpen className="h-6 w-6 mx-auto mb-2" />
-              <div className="text-2xl font-bold">{studentData.coursesEnrolled}</div>
-              <div className="text-xs opacity-90">Active Courses</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gradient-to-r from-orange-500 to-orange-600 text-white">
-            <CardContent className="p-4 text-center">
-              <Users className="h-6 w-6 mx-auto mb-2" />
-              <div className="text-2xl font-bold">{studentData.upcomingSessions}</div>
-              <div className="text-xs opacity-90">Upcoming Sessions</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white">
-            <CardContent className="p-4 text-center">
-              <Award className="h-6 w-6 mx-auto mb-2" />
-              <div className="text-2xl font-bold">{studentData.achievements}</div>
-              <div className="text-xs opacity-90">Achievements</div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gradient-to-r from-pink-500 to-pink-600 text-white">
-            <CardContent className="p-4 text-center">
-              <Fire className="h-6 w-6 mx-auto mb-2" />
-              <div className="text-2xl font-bold">{studyStreak}</div>
-              <div className="text-xs opacity-90">Day Streak</div>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Left Column */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Weekly Goal Progress */}
+          {/* Quick Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <Card>
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle className="flex items-center">
-                      <Target className="h-5 w-5 mr-2 text-blue-600" />
-                      Weekly Study Goal
-                    </CardTitle>
-                    <CardDescription>You're doing great! Keep it up!</CardDescription>
+              <CardContent className="p-6">
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <Brain className="h-6 w-6 text-blue-600" />
                   </div>
-                  <Badge variant="outline" className="text-blue-600 border-blue-200">
-                    {Math.round((currentProgress / weeklyGoal) * 100)}% Complete
-                  </Badge>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex justify-between text-sm">
-                    <span>{currentProgress} hours completed</span>
-                    <span>{weeklyGoal} hours goal</span>
-                  </div>
-                  <Progress value={(currentProgress / weeklyGoal) * 100} className="h-3" />
-                  <div className="text-sm text-gray-600">
-                    {weeklyGoal - currentProgress} hours remaining • {7 - new Date().getDay()} days left
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600">Study Hours</p>
+                    <p className="text-2xl font-bold text-gray-900">24.5</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Course Progress */}
             <Card>
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle>Course Progress</CardTitle>
-                  <Link href="/grades">
-                    <Button variant="outline" size="sm">
-                      View All <ChevronRight className="h-4 w-4 ml-1" />
-                    </Button>
-                  </Link>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {recentCourses.map((course, index) => (
-                    <div key={index} className="border rounded-lg p-4 hover:bg-gray-50 transition-colors">
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
-                            <BookOpen className="h-5 w-5 text-white" />
-                          </div>
-                          <div>
-                            <h3 className="font-semibold">{course.name}</h3>
-                            <p className="text-sm text-gray-600">Next: {course.nextAssignment}</p>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <Badge variant="outline" className="mb-1">
-                            {course.grade}
-                          </Badge>
-                          <div className="text-xs text-gray-500">Due {course.dueDate}</div>
-                        </div>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Progress value={course.progress} className="flex-1 h-2" />
-                        <span className="text-sm font-medium">{course.progress}%</span>
-                      </div>
-                    </div>
-                  ))}
+              <CardContent className="p-6">
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                    <Target className="h-6 w-6 text-green-600" />
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600">Goals Completed</p>
+                    <p className="text-2xl font-bold text-gray-900">8/12</p>
+                  </div>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Study Insights */}
             <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <TrendingUp className="h-5 w-5 mr-2 text-green-600" />
-                  Study Insights
-                </CardTitle>
-                <CardDescription>AI-powered analysis of your study patterns</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {studyInsights.map((insight, index) => (
-                    <div key={index} className="bg-gray-50 rounded-lg p-4">
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-sm text-gray-600">{insight.metric}</span>
-                        <Badge variant="outline" className="text-green-600 border-green-200">
-                          {insight.trend}
-                        </Badge>
-                      </div>
-                      <div className="text-lg font-semibold">{insight.value}</div>
-                    </div>
-                  ))}
+              <CardContent className="p-6">
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <Award className="h-6 w-6 text-purple-600" />
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600">Current GPA</p>
+                    <p className="text-2xl font-bold text-gray-900">3.7</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                    <TrendingUp className="h-6 w-6 text-orange-600" />
+                  </div>
+                  <div className="ml-4">
+                    <p className="text-sm font-medium text-gray-600">Streak</p>
+                    <p className="text-2xl font-bold text-gray-900">15 days</p>
+                  </div>
                 </div>
               </CardContent>
             </Card>
           </div>
 
-          {/* Right Column */}
-          <div className="space-y-6">
-            {/* Today's Schedule */}
-            <Card>
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle className="flex items-center">
-                    <Calendar className="h-5 w-5 mr-2 text-purple-600" />
-                    Today's Schedule
-                  </CardTitle>
-                  <Link href="/calendar">
-                    <Button variant="ghost" size="sm">
-                      <Plus className="h-4 w-4" />
-                    </Button>
-                  </Link>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {upcomingEvents.map((event, index) => (
-                    <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+          <Tabs defaultValue="overview" className="space-y-6">
+            <TabsList className="grid w-full grid-cols-4">
+              <TabsTrigger value="overview">Overview</TabsTrigger>
+              <TabsTrigger value="courses">Courses</TabsTrigger>
+              <TabsTrigger value="schedule">Schedule</TabsTrigger>
+              <TabsTrigger value="progress">Progress</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="overview" className="space-y-6">
+              <div className="grid lg:grid-cols-2 gap-6">
+                {/* Quick Actions */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Quick Actions</CardTitle>
+                    <CardDescription>Jump into your most used features</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <Link href="/ai-assistant">
+                      <Button className="w-full justify-start bg-transparent" variant="outline">
+                        <Brain className="h-4 w-4 mr-2" />
+                        Ask AI Tutor
+                        <ArrowRight className="h-4 w-4 ml-auto" />
+                      </Button>
+                    </Link>
+                    <Link href="/calendar">
+                      <Button className="w-full justify-start bg-transparent" variant="outline">
+                        <Calendar className="h-4 w-4 mr-2" />
+                        View Calendar
+                        <ArrowRight className="h-4 w-4 ml-auto" />
+                      </Button>
+                    </Link>
+                    <Link href="/study-groups">
+                      <Button className="w-full justify-start bg-transparent" variant="outline">
+                        <Users className="h-4 w-4 mr-2" />
+                        Join Study Group
+                        <ArrowRight className="h-4 w-4 ml-auto" />
+                      </Button>
+                    </Link>
+                    <Link href="/flashcards">
+                      <Button className="w-full justify-start bg-transparent" variant="outline">
+                        <BookOpen className="h-4 w-4 mr-2" />
+                        Practice Flashcards
+                        <ArrowRight className="h-4 w-4 ml-auto" />
+                      </Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+
+                {/* Recent Activity */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Recent Activity</CardTitle>
+                    <CardDescription>Your latest study sessions and achievements</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="flex items-center space-x-3">
                       <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                       <div className="flex-1">
-                        <div className="font-medium text-sm">{event.type}</div>
-                        <div className="text-xs text-gray-600">
-                          {event.subject} • {event.time}
-                        </div>
-                        {event.tutor && <div className="text-xs text-gray-500">with {event.tutor}</div>}
-                        {event.members && <div className="text-xs text-gray-500">{event.members} members</div>}
+                        <p className="text-sm font-medium">Completed Math Chapter 5</p>
+                        <p className="text-xs text-gray-500">2 hours ago</p>
                       </div>
                     </div>
-                  ))}
-                  <Link href="/calendar">
-                    <Button variant="outline" className="w-full mt-3 bg-transparent" size="sm">
-                      View Full Calendar
-                    </Button>
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <div className="flex-1">
+                        <p className="text-sm font-medium">Joined Physics Study Group</p>
+                        <p className="text-xs text-gray-500">5 hours ago</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                      <div className="flex-1">
+                        <p className="text-sm font-medium">AI Tutor session: Chemistry</p>
+                        <p className="text-xs text-gray-500">1 day ago</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                      <div className="flex-1">
+                        <p className="text-sm font-medium">Flashcard review: History</p>
+                        <p className="text-xs text-gray-500">2 days ago</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
 
-            {/* Quick Actions */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Quick Actions</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 gap-3">
-                  <Link href="/ai-assistant">
-                    <Button
-                      variant="outline"
-                      className="w-full h-16 flex flex-col items-center justify-center bg-transparent"
-                    >
-                      <Brain className="h-5 w-5 mb-1" />
-                      <span className="text-xs">AI Help</span>
-                    </Button>
-                  </Link>
-                  <Link href="/peer-tutoring">
-                    <Button
-                      variant="outline"
-                      className="w-full h-16 flex flex-col items-center justify-center bg-transparent"
-                    >
-                      <Users className="h-5 w-5 mb-1" />
-                      <span className="text-xs">Find Tutor</span>
-                    </Button>
-                  </Link>
-                  <Link href="/study-groups">
-                    <Button
-                      variant="outline"
-                      className="w-full h-16 flex flex-col items-center justify-center bg-transparent"
-                    >
-                      <BookOpen className="h-5 w-5 mb-1" />
-                      <span className="text-xs">Study Group</span>
-                    </Button>
-                  </Link>
-                  <Link href="/grades">
-                    <Button
-                      variant="outline"
-                      className="w-full h-16 flex flex-col items-center justify-center bg-transparent"
-                    >
-                      <Star className="h-5 w-5 mb-1" />
-                      <span className="text-xs">Grades</span>
-                    </Button>
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
+              {/* Upcoming Tasks */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Upcoming Tasks</CardTitle>
+                  <CardDescription>Don't miss these important deadlines</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between p-4 border rounded-lg">
+                      <div className="flex items-center space-x-3">
+                        <Clock className="h-5 w-5 text-red-500" />
+                        <div>
+                          <p className="font-medium">Math Assignment Due</p>
+                          <p className="text-sm text-gray-500">Tomorrow, 11:59 PM</p>
+                        </div>
+                      </div>
+                      <Badge variant="destructive">Urgent</Badge>
+                    </div>
+                    <div className="flex items-center justify-between p-4 border rounded-lg">
+                      <div className="flex items-center space-x-3">
+                        <Clock className="h-5 w-5 text-yellow-500" />
+                        <div>
+                          <p className="font-medium">Physics Lab Report</p>
+                          <p className="text-sm text-gray-500">Friday, 5:00 PM</p>
+                        </div>
+                      </div>
+                      <Badge variant="secondary">Pending</Badge>
+                    </div>
+                    <div className="flex items-center justify-between p-4 border rounded-lg">
+                      <div className="flex items-center space-x-3">
+                        <Clock className="h-5 w-5 text-blue-500" />
+                        <div>
+                          <p className="font-medium">History Essay</p>
+                          <p className="text-sm text-gray-500">Next Monday, 9:00 AM</p>
+                        </div>
+                      </div>
+                      <Badge variant="outline">Scheduled</Badge>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
 
-            {/* Achievement Badge */}
-            <Card className="bg-gradient-to-r from-yellow-50 to-orange-50 border-yellow-200">
-              <CardContent className="p-4 text-center">
-                <Award className="h-8 w-8 text-yellow-600 mx-auto mb-2" />
-                <h3 className="font-semibold text-yellow-800 mb-1">Study Streak Champion!</h3>
-                <p className="text-sm text-yellow-700">You've studied for 7 days straight. Keep it up!</p>
-                <Badge className="mt-2 bg-yellow-500 hover:bg-yellow-600">🔥 {studyStreak} Days</Badge>
-              </CardContent>
-            </Card>
-          </div>
+            <TabsContent value="courses" className="space-y-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <div className="w-8 h-8 bg-blue-100 rounded mr-3 flex items-center justify-center">
+                        <span className="text-blue-600 font-bold text-sm">M</span>
+                      </div>
+                      Mathematics
+                    </CardTitle>
+                    <CardDescription>Calculus II</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span>Progress</span>
+                        <span>75%</span>
+                      </div>
+                      <Progress value={75} />
+                      <p className="text-xs text-gray-500">Next: Chapter 6 - Integration</p>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <div className="w-8 h-8 bg-green-100 rounded mr-3 flex items-center justify-center">
+                        <span className="text-green-600 font-bold text-sm">P</span>
+                      </div>
+                      Physics
+                    </CardTitle>
+                    <CardDescription>General Physics I</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span>Progress</span>
+                        <span>60%</span>
+                      </div>
+                      <Progress value={60} />
+                      <p className="text-xs text-gray-500">Next: Lab - Momentum</p>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <div className="w-8 h-8 bg-purple-100 rounded mr-3 flex items-center justify-center">
+                        <span className="text-purple-600 font-bold text-sm">C</span>
+                      </div>
+                      Chemistry
+                    </CardTitle>
+                    <CardDescription>Organic Chemistry</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span>Progress</span>
+                        <span>45%</span>
+                      </div>
+                      <Progress value={45} />
+                      <p className="text-xs text-gray-500">Next: Reaction Mechanisms</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="schedule" className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Today's Schedule</CardTitle>
+                  <CardDescription>Wednesday, January 8, 2025</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="flex items-center space-x-4 p-3 border-l-4 border-blue-500 bg-blue-50 rounded">
+                      <div className="text-sm font-medium text-blue-600">9:00 AM</div>
+                      <div className="flex-1">
+                        <p className="font-medium">Mathematics Lecture</p>
+                        <p className="text-sm text-gray-500">Room 201, Science Building</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-4 p-3 border-l-4 border-green-500 bg-green-50 rounded">
+                      <div className="text-sm font-medium text-green-600">11:00 AM</div>
+                      <div className="flex-1">
+                        <p className="font-medium">Physics Lab</p>
+                        <p className="text-sm text-gray-500">Lab 3, Physics Building</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-4 p-3 border-l-4 border-purple-500 bg-purple-50 rounded">
+                      <div className="text-sm font-medium text-purple-600">2:00 PM</div>
+                      <div className="flex-1">
+                        <p className="font-medium">Study Group - Chemistry</p>
+                        <p className="text-sm text-gray-500">Library, Room 15</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-4 p-3 border-l-4 border-orange-500 bg-orange-50 rounded">
+                      <div className="text-sm font-medium text-orange-600">4:00 PM</div>
+                      <div className="flex-1">
+                        <p className="font-medium">AI Tutor Session</p>
+                        <p className="text-sm text-gray-500">Online - Math Review</p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="progress" className="space-y-6">
+              <div className="grid lg:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Weekly Study Hours</CardTitle>
+                    <CardDescription>Your study time this week</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm">Monday</span>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-32 bg-gray-200 rounded-full h-2">
+                            <div className="bg-blue-600 h-2 rounded-full" style={{ width: "80%" }}></div>
+                          </div>
+                          <span className="text-sm">4h</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm">Tuesday</span>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-32 bg-gray-200 rounded-full h-2">
+                            <div className="bg-blue-600 h-2 rounded-full" style={{ width: "60%" }}></div>
+                          </div>
+                          <span className="text-sm">3h</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm">Wednesday</span>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-32 bg-gray-200 rounded-full h-2">
+                            <div className="bg-blue-600 h-2 rounded-full" style={{ width: "100%" }}></div>
+                          </div>
+                          <span className="text-sm">5h</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm">Thursday</span>
+                        <div className="flex items-center space-x-2">
+                          <div className="w-32 bg-gray-200 rounded-full h-2">
+                            <div className="bg-blue-600 h-2 rounded-full" style={{ width: "40%" }}></div>
+                          </div>
+                          <span className="text-sm">2h</span>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Subject Performance</CardTitle>
+                    <CardDescription>Your grades across subjects</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm">Mathematics</span>
+                        <div className="flex items-center space-x-2">
+                          <Badge variant="secondary">A-</Badge>
+                          <span className="text-sm text-green-600">↗ +0.2</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm">Physics</span>
+                        <div className="flex items-center space-x-2">
+                          <Badge variant="secondary">B+</Badge>
+                          <span className="text-sm text-green-600">↗ +0.3</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm">Chemistry</span>
+                        <div className="flex items-center space-x-2">
+                          <Badge variant="secondary">B</Badge>
+                          <span className="text-sm text-gray-500">→ 0.0</span>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm">History</span>
+                        <div className="flex items-center space-x-2">
+                          <Badge variant="secondary">A</Badge>
+                          <span className="text-sm text-green-600">↗ +0.1</span>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </div>
