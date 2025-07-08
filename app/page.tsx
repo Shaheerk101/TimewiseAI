@@ -154,8 +154,118 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Stats Section */}
+      <section className="py-20 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+        <div className="container mx-auto max-w-6xl text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Trusted by Students Worldwide</h2>
+          <p className="text-xl mb-12 opacity-90">
+            Join thousands of students who have transformed their academic journey
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="text-center">
+              <div className="text-5xl font-bold mb-2">50K+</div>
+              <div className="text-xl opacity-90">Active Students</div>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl font-bold mb-2">95%</div>
+              <div className="text-xl opacity-90">Improved Grades</div>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl font-bold mb-2">1M+</div>
+              <div className="text-xl opacity-90">Study Sessions</div>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl font-bold mb-2">24/7</div>
+              <div className="text-xl opacity-90">AI Support</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 px-4 bg-white">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">What Students Are Saying</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              See how TimeWiseAI is transforming the way students learn and succeed.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="border-0 shadow-lg">
+              <CardContent className="p-6">
+                <div className="flex text-yellow-400 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 fill-current" />
+                  ))}
+                </div>
+                <p className="text-gray-600 mb-4">
+                  "TimeWiseAI helped me improve my GPA from 2.8 to 3.7 in just one semester. The AI tutor is
+                  incredible!"
+                </p>
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                    <span className="text-blue-600 font-semibold">SC</span>
+                  </div>
+                  <div>
+                    <div className="font-medium text-gray-900">Sarah Chen</div>
+                    <div className="text-sm text-gray-500">Computer Science, MIT</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg">
+              <CardContent className="p-6">
+                <div className="flex text-yellow-400 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 fill-current" />
+                  ))}
+                </div>
+                <p className="text-gray-600 mb-4">
+                  "The study groups feature connected me with amazing classmates. We aced our final project together!"
+                </p>
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                    <span className="text-purple-600 font-semibold">MJ</span>
+                  </div>
+                  <div>
+                    <div className="font-medium text-gray-900">Marcus Johnson</div>
+                    <div className="text-sm text-gray-500">Business, Stanford</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-lg">
+              <CardContent className="p-6">
+                <div className="flex text-yellow-400 mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 fill-current" />
+                  ))}
+                </div>
+                <p className="text-gray-600 mb-4">
+                  "Smart scheduling saved me hours every week. I finally have time for both studies and social life!"
+                </p>
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                    <span className="text-green-600 font-semibold">ER</span>
+                  </div>
+                  <div>
+                    <div className="font-medium text-gray-900">Emma Rodriguez</div>
+                    <div className="text-sm text-gray-500">Pre-Med, Harvard</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Pricing Section */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 bg-gray-50">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Choose Your Learning Journey</h2>
@@ -385,24 +495,24 @@ export default function HomePage() {
               <h3 className="font-semibold mb-4">Company</h3>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <Link href="/about" className="hover:text-white transition-colors">
+                  <a href="#" className="hover:text-white transition-colors">
                     About Us
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link href="/contact" className="hover:text-white transition-colors">
+                  <a href="#" className="hover:text-white transition-colors">
                     Contact
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link href="/privacy" className="hover:text-white transition-colors">
+                  <a href="#" className="hover:text-white transition-colors">
                     Privacy Policy
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link href="/terms" className="hover:text-white transition-colors">
+                  <a href="#" className="hover:text-white transition-colors">
                     Terms of Service
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </div>
