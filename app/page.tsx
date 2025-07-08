@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import { Brain, BookOpen, Users, Calendar, FileText, ArrowRight, CheckCircle, Gift, Smartphone, Star, Crown } from 'lucide-react'
+import { SyllabusUpload } from "@/components/syllabus-upload"
+import { Brain, BookOpen, Users, Calendar, FileText, ArrowRight, CheckCircle, Star, Crown } from "lucide-react"
 import Link from "next/link"
 
 export default function HomePage() {
@@ -15,112 +16,96 @@ export default function HomePage() {
     {
       icon: Brain,
       title: "AI Study Assistant",
-      description: "Get instant help with homework, explanations, and study guides across all subjects",
+      description: "Get instant help with homework and study guides across all subjects",
       color: "text-purple-600",
       bgColor: "bg-purple-50",
     },
     {
       icon: BookOpen,
-      title: "Live Tutoring",
-      description: "Connect with expert tutors for personalized 1-on-1 sessions",
+      title: "Peer Tutoring",
+      description: "Connect with student tutors for affordable 1-on-1 sessions",
       color: "text-blue-600",
       bgColor: "bg-blue-50",
     },
     {
       icon: Users,
-      title: "Friend Groups & Social Calendar",
-      description: "Add friends, create groups, and find time to hang out together automatically",
+      title: "Study Groups",
+      description: "Join or create study groups with classmates in your courses",
       color: "text-green-600",
       bgColor: "bg-green-50",
     },
     {
       icon: Calendar,
-      title: "Smart Adaptive Scheduling",
-      description: "AI calendar that adjusts when plans change while keeping friend meetups intact",
+      title: "Smart Scheduling",
+      description: "AI-powered calendar that helps you balance study time and social activities",
       color: "text-orange-600",
       bgColor: "bg-orange-50",
     },
     {
       icon: FileText,
-      title: "Document Scanner",
-      description: "Scan textbooks, notes, and homework with our browser extension",
+      title: "Syllabus Analysis",
+      description: "Upload your syllabus and get an organized study plan for the semester",
       color: "text-red-600",
       bgColor: "bg-red-50",
-    },
-    {
-      icon: Smartphone,
-      title: "Mobile App",
-      description: "Full-featured iOS and Android app with social features and notifications",
-      color: "text-indigo-600",
-      bgColor: "bg-indigo-50",
     },
   ]
 
   const testimonials = [
     {
       name: "Sarah Johnson",
-      role: "High School Senior",
-      content:
-        "TimeWiseAI helped me raise my GPA from 3.2 to 3.8! The friend groups feature helps me balance study and social time.",
+      role: "Computer Science Student",
+      content: "TimeWiseAI helped me organize my coursework and find study partners. My grades improved significantly!",
       rating: 5,
       avatar: "/placeholder.svg?height=40&width=40",
     },
     {
       name: "Mike Chen",
-      role: "College Freshman",
-      content:
-        "The adaptive calendar is a game-changer! When my exam got moved, it automatically rescheduled everything but kept my friend hangouts.",
+      role: "Business Major",
+      content: "The AI assistant is incredibly helpful for understanding complex concepts. Highly recommend!",
       rating: 5,
       avatar: "/placeholder.svg?height=40&width=40",
     },
     {
       name: "Emma Davis",
-      role: "Graduate Student",
-      content: "Love how it finds time for my study group AND my social groups. Perfect work-life balance tool!",
+      role: "Pre-Med Student",
+      content: "Found amazing tutors through the platform. The scheduling feature keeps me organized.",
       rating: 5,
       avatar: "/placeholder.svg?height=40&width=40",
     },
   ]
 
-  const stats = [
-    { number: "50K+", label: "Students Connected" },
-    { number: "500+", label: "Expert Tutors" },
-    { number: "10K+", label: "Friend Groups" },
-    { number: "4.9/5", label: "Student Rating" },
-  ]
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-green-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Navigation */}
       <nav className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
                 <Brain className="h-5 w-5 text-white" />
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 TimeWiseAI
               </span>
             </div>
             <div className="hidden md:flex items-center space-x-6">
-              <a href="#features" className="text-gray-600 hover:text-purple-600 transition-colors">
+              <a href="#features" className="text-gray-600 hover:text-blue-600 transition-colors">
                 Features
               </a>
-              <a href="#pricing" className="text-gray-600 hover:text-purple-600 transition-colors">
+              <a href="#pricing" className="text-gray-600 hover:text-blue-600 transition-colors">
                 Pricing
               </a>
-              <a href="#social" className="text-gray-600 hover:text-purple-600 transition-colors">
-                Social Features
-              </a>
-              <Link href="/mobile-app" className="text-gray-600 hover:text-purple-600 transition-colors">
-                Download App
+              <Link href="/peer-tutoring" className="text-gray-600 hover:text-blue-600 transition-colors">
+                Find Tutors
               </Link>
-              <Button variant="outline" className="border-purple-200 text-purple-600 hover:bg-purple-50 bg-transparent">
+              <Link href="/ai-assistant" className="text-gray-600 hover:text-blue-600 transition-colors">
+                AI Assistant
+              </Link>
+              <Button variant="outline" className="border-blue-200 text-blue-600 hover:bg-blue-50 bg-transparent">
                 Sign In
               </Button>
-              <Button className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600">
-                Get Started Free
+              <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600">
+                Get Started
               </Button>
             </div>
           </div>
@@ -128,67 +113,67 @@ export default function HomePage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="py-20">
+      <section className="py-16">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto">
-            <Badge className="mb-6 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-700 border-purple-200">
-              <Gift className="h-3 w-3 mr-1" />
-              FREE during Finals Period (Dec & May-June)
-            </Badge>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 bg-clip-text text-transparent">
-              Study Smart, Socialize Better
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Academic Success Made Simple
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
-              AI-powered study assistant + social calendar that finds time for friends.
-              <span className="font-semibold text-purple-600"> Balance academics and social life perfectly!</span>
+            <p className="text-lg md:text-xl text-gray-600 mb-6 leading-relaxed max-w-3xl mx-auto">
+              TimeWiseAI is a comprehensive platform that helps students excel academically through AI-powered study
+              assistance, peer tutoring, and smart scheduling tools. Upload your syllabus, get organized, and connect
+              with fellow students to achieve your academic goals.
             </p>
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-12">
-              <div className="flex items-center space-x-2">
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-80 h-12 text-lg border-purple-200 focus:border-purple-400"
-                />
-                <Button
-                  size="lg"
-                  className="h-12 px-8 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600"
-                >
-                  Start Learning Free
-                  <ArrowRight className="h-4 w-4 ml-2" />
-                </Button>
-              </div>
+            <p className="text-base text-gray-500 mb-8">
+              Join thousands of students who are already improving their grades and managing their time more
+              effectively.
+            </p>
+
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
+              <Input
+                type="email"
+                placeholder="Enter your email to get started"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-80 h-12 text-base border-gray-300 focus:border-blue-400"
+              />
+              <Button
+                size="lg"
+                className="h-12 px-8 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600"
+              >
+                Start Free
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
             </div>
-            <div className="flex items-center justify-center space-x-8 text-sm text-gray-500">
+
+            <div className="flex items-center justify-center space-x-6 text-sm text-gray-500">
+              <div className="flex items-center">
+                <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                Free to start
+              </div>
               <div className="flex items-center">
                 <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
                 No credit card required
               </div>
               <div className="flex items-center">
                 <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                Free during finals
-              </div>
-              <div className="flex items-center">
-                <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                Mobile app included
+                Cancel anytime
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-white/50 backdrop-blur-sm">
+      {/* Syllabus Upload Section */}
+      <section className="py-16 bg-white/50">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-purple-600 mb-2">{stat.number}</div>
-                <div className="text-gray-600">{stat.label}</div>
-              </div>
-            ))}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">Get Started in Seconds</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Upload your course syllabus and we'll create a personalized study plan for your entire semester
+            </p>
           </div>
+          <SyllabusUpload />
         </div>
       </section>
 
@@ -196,18 +181,16 @@ export default function HomePage() {
       <section id="features" className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-              Everything You Need to Succeed
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              From AI tutoring to social scheduling, we've got your academic and social life covered
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">Everything You Need to Succeed</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Comprehensive tools designed to help students manage their academic workload effectively
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <Card
                 key={index}
-                className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white/80 backdrop-blur-sm"
+                className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white"
               >
                 <CardHeader>
                   <div className={`w-12 h-12 rounded-lg ${feature.bgColor} flex items-center justify-center mb-4`}>
@@ -227,134 +210,126 @@ export default function HomePage() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 bg-white/50 backdrop-blur-sm">
+      <section id="pricing" className="py-20 bg-white/50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-              Choose Your Learning Plan
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Start free and upgrade when you're ready. All plans include peer tutoring access!
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">Simple, Transparent Pricing</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Choose the plan that works best for your academic needs
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {/* Free Plan */}
-            <Card className="border-2 border-gray-200 bg-white/80 backdrop-blur-sm">
+            <Card className="border-2 border-gray-200 bg-white">
               <CardHeader className="text-center">
                 <CardTitle className="text-2xl font-bold">Free</CardTitle>
                 <div className="text-4xl font-bold text-gray-800 mb-2">$0</div>
-                <CardDescription>Perfect for getting started</CardDescription>
+                <CardDescription>Perfect for trying out the platform</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-3">
                   <div className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-3" />
-                    <span className="text-sm">Up to 2 Classes</span>
+                    <span className="text-sm">Basic AI assistance</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-3" />
-                    <span className="text-sm">Basic Calendar</span>
+                    <span className="text-sm">Syllabus upload</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-3" />
-                    <span className="text-sm">100 Monthly AI Queries</span>
+                    <span className="text-sm">Basic calendar</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-3" />
-                    <span className="text-sm">Peer Tutoring Access</span>
-                  </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-3" />
-                    <span className="text-sm">Friend Groups</span>
+                    <span className="text-sm">Community access</span>
                   </div>
                 </div>
-                <Button className="w-full bg-gray-600 hover:bg-gray-700">Get Started Free</Button>
+                <Link href="/subscribe?plan=free">
+                  <Button className="w-full bg-gray-600 hover:bg-gray-700">Get Started Free</Button>
+                </Link>
               </CardContent>
             </Card>
 
             {/* Pro Plan */}
-            <Card className="border-2 border-purple-300 bg-white/80 backdrop-blur-sm relative">
+            <Card className="border-2 border-blue-300 bg-white relative">
               <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                <Badge className="bg-purple-500 text-white">Most Popular</Badge>
+                <Badge className="bg-blue-500 text-white">Most Popular</Badge>
               </div>
               <CardHeader className="text-center">
                 <CardTitle className="text-2xl font-bold">Pro</CardTitle>
-                <div className="text-4xl font-bold text-purple-600 mb-2">$9.99</div>
+                <div className="text-4xl font-bold text-blue-600 mb-2">$9.99</div>
                 <CardDescription>For serious students</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-3">
                   <div className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-3" />
-                    <span className="text-sm">Up to 5 Classes</span>
+                    <span className="text-sm">Unlimited AI queries</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-3" />
-                    <span className="text-sm">Advanced Calendar Tools</span>
+                    <span className="text-sm">Advanced scheduling</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-3" />
-                    <span className="text-sm">10,000+ Monthly AI Queries</span>
+                    <span className="text-sm">Priority tutor matching</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-3" />
-                    <span className="text-sm">Calendar Export</span>
+                    <span className="text-sm">Study analytics</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-3" />
-                    <span className="text-sm">Priority Support</span>
-                  </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-3" />
-                    <span className="text-sm">All Free Features</span>
+                    <span className="text-sm">All free features</span>
                   </div>
                 </div>
-                <Button className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600">
-                  Upgrade to Pro
-                </Button>
+                <Link href="/subscribe?plan=pro">
+                  <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600">
+                    Upgrade to Pro
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
 
             {/* Ultimate Plan */}
-            <Card className="border-2 border-yellow-300 bg-white/80 backdrop-blur-sm">
+            <Card className="border-2 border-purple-300 bg-white">
               <CardHeader className="text-center">
                 <CardTitle className="text-2xl font-bold flex items-center justify-center">
-                  <Crown className="h-5 w-5 text-yellow-500 mr-2" />
+                  <Crown className="h-5 w-5 text-purple-500 mr-2" />
                   Ultimate
                 </CardTitle>
-                <div className="text-4xl font-bold text-yellow-600 mb-2">$19.99</div>
+                <div className="text-4xl font-bold text-purple-600 mb-2">$19.99</div>
                 <CardDescription>For academic excellence</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-3">
                   <div className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-3" />
-                    <span className="text-sm">Unlimited Classes</span>
+                    <span className="text-sm">Personal study coach</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-3" />
-                    <span className="text-sm">Premium Calendar Features</span>
+                    <span className="text-sm">Advanced AI features</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-3" />
-                    <span className="text-sm">Unlimited AI Queries</span>
+                    <span className="text-sm">Custom study plans</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-3" />
-                    <span className="text-sm">Advanced Analytics</span>
+                    <span className="text-sm">Priority support</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-4 w-4 text-green-500 mr-3" />
-                    <span className="text-sm">1-on-1 Success Coaching</span>
-                  </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="h-4 w-4 text-green-500 mr-3" />
-                    <span className="text-sm">All Pro Features</span>
+                    <span className="text-sm">All pro features</span>
                   </div>
                 </div>
-                <Button className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600">
-                  Go Ultimate
-                </Button>
+                <Link href="/subscribe?plan=ultimate">
+                  <Button className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
+                    Go Ultimate
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           </div>
@@ -365,13 +340,11 @@ export default function HomePage() {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-              Loved by Students Everywhere
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">What Students Are Saying</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+              <Card key={index} className="border-0 shadow-lg bg-white">
                 <CardContent className="p-6">
                   <div className="flex items-center mb-4">
                     <img
@@ -398,26 +371,30 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-purple-600 to-blue-600">
+      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Ready to Transform Your Student Life?</h2>
-            <p className="text-xl text-purple-100 mb-8">
-              Join thousands of students who've found the perfect balance between academics and social life
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Improve Your Grades?</h2>
+            <p className="text-lg text-blue-100 mb-8">
+              Join thousands of students who are already succeeding with TimeWiseAI
             </p>
             <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-              <Button size="lg" className="bg-white text-purple-600 hover:bg-gray-100 h-14 px-8 text-lg font-semibold">
-                Start Free Today
-                <ArrowRight className="h-5 w-5 ml-2" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-purple-600 h-14 px-8 text-lg font-semibold bg-transparent"
-              >
-                Download Mobile App
-                <Smartphone className="h-5 w-5 ml-2" />
-              </Button>
+              <Link href="/subscribe">
+                <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100 h-12 px-8 text-lg font-semibold">
+                  Get Started Free
+                  <ArrowRight className="h-5 w-5 ml-2" />
+                </Button>
+              </Link>
+              <Link href="/peer-tutoring">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-white text-white hover:bg-white hover:text-blue-600 h-12 px-8 text-lg font-semibold bg-transparent"
+                >
+                  Find a Tutor
+                  <BookOpen className="h-5 w-5 ml-2" />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -429,44 +406,46 @@ export default function HomePage() {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg flex items-center justify-center">
+                <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
                   <Brain className="h-5 w-5 text-white" />
                 </div>
                 <span className="text-xl font-bold">TimeWiseAI</span>
               </div>
               <p className="text-gray-400">
-                The AI-powered platform that helps students succeed academically while maintaining a healthy social
-                life.
+                Helping students succeed academically through AI-powered tools and peer connections.
               </p>
             </div>
             <div>
               <h3 className="font-semibold mb-4">Features</h3>
               <ul className="space-y-2 text-gray-400">
-                <li>AI Study Assistant</li>
-                <li>Live Tutoring</li>
-                <li>Social Calendar</li>
-                <li>Friend Groups</li>
-                <li>Mobile App</li>
+                <li>
+                  <Link href="/ai-assistant">AI Study Assistant</Link>
+                </li>
+                <li>
+                  <Link href="/peer-tutoring">Peer Tutoring</Link>
+                </li>
+                <li>
+                  <Link href="/calendar">Smart Calendar</Link>
+                </li>
+                <li>Study Groups</li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold mb-4">Company</h3>
               <ul className="space-y-2 text-gray-400">
                 <li>About Us</li>
-                <li>Careers</li>
                 <li>Privacy Policy</li>
                 <li>Terms of Service</li>
-                <li>Contact</li>
+                <li>Contact Support</li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold mb-4">Connect</h3>
               <ul className="space-y-2 text-gray-400">
-                <li>Twitter</li>
-                <li>Instagram</li>
-                <li>TikTok</li>
-                <li>Discord</li>
-                <li>Support</li>
+                <li>Discord Community</li>
+                <li>Study Tips Blog</li>
+                <li>Help Center</li>
+                <li>Student Success Stories</li>
               </ul>
             </div>
           </div>
