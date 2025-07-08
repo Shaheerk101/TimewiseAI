@@ -1,9 +1,18 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { openai } from "@/lib/openai"
+import { openai, isOpenAIConfigured } from "@/lib/openai"
 
 export async function POST(request: NextRequest) {
   try {
+    // Check if OpenAI is properly configured
+    if (!isOpenAIConfigured()) {
+      return NextResponse.json({ error: "AI service is not configured. Please contact support." }, { status: 503 })
+    }
+
     const { message } = await request.json()
+
+    if (!message) {
+      return NextResponse.json({ error: "Message is required" }, { status: 400 })
+    }
 
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
@@ -27,6 +36,12 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ response })
   } catch (error) {
     console.error("OpenAI API error:", error)
-    return NextResponse.json({ error: "Failed to get AI response" }, { status: 500 })
+
+    // Handle specific OpenAI errors
+    if (error instanceof Error && error.message.includes("API key")) {
+      return NextResponse.json({ error: "AI service configuration error. Please contact support." }, { status: 503 })
+    }
+
+    return NextResponse.json({ error: "Failed to get AI response. Please try again later." }, { status: 500 })
   }
 }
