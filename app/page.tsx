@@ -2,152 +2,113 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Brain, Clock, Users, Star, CheckCircle, Zap, Target, TrendingUp, Lightbulb } from "lucide-react"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { SyllabusUpload } from "@/components/syllabus-upload"
+import { Brain, Calendar, Users, BookOpen, Target, Zap, Star, ArrowRight } from "lucide-react"
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Hero Section */}
-      <section className="relative py-20 px-4 text-center">
-        <div className="container mx-auto max-w-6xl">
-          <div className="mb-8">
-            <Badge className="mb-4 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 border-blue-200">
-              🚀 AI-Powered Learning Platform
-            </Badge>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
-              Master Your Studies with TimeWiseAI
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Transform your academic journey with AI tutoring, smart scheduling, personalized learning paths, and
-              social features designed for student success.
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Link href="/dashboard">
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl font-semibold text-lg"
-              >
-                <Zap className="mr-2 h-5 w-5" />
-                Start Learning Free
-              </Button>
-            </Link>
-            <Link href="/ai-assistant">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-2 border-blue-200 hover:border-blue-300 text-blue-700 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-blue-50 bg-transparent"
-              >
-                <Brain className="mr-2 h-5 w-5" />
-                Try AI Assistant
-              </Button>
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="flex items-center justify-center space-x-2 text-gray-600">
-              <CheckCircle className="h-5 w-5 text-green-500" />
-              <span>Free to start • Cancel anytime</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2 text-gray-600">
-              <CheckCircle className="h-5 w-5 text-green-500" />
-              <span>AI-powered tutoring</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2 text-gray-600">
-              <CheckCircle className="h-5 w-5 text-green-500" />
-              <span>24/7 study support</span>
-            </div>
+      <section className="relative px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl text-center">
+          <Badge className="mb-4 bg-blue-100 text-blue-800 hover:bg-blue-200">🚀 AI-Powered Learning Platform</Badge>
+          <h1 className="mb-6 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+            Master Your Studies with{" "}
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              TimeWise AI
+            </span>
+          </h1>
+          <p className="mx-auto mb-8 max-w-2xl text-xl text-gray-600">
+            Transform your academic journey with personalized AI tutoring, smart scheduling, and collaborative learning
+            tools designed for modern students.
+          </p>
+          <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
+            <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+              Start Learning Free
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+            <Button size="lg" variant="outline">
+              Watch Demo
+            </Button>
           </div>
         </div>
       </section>
 
+      {/* Syllabus Upload Section */}
+      <section className="px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Upload Your Syllabus</h2>
+            <p className="text-lg text-gray-600">
+              Get started by uploading your course syllabus. Our AI will analyze it and create a personalized study plan
+              just for you.
+            </p>
+          </div>
+          <SyllabusUpload />
+        </div>
+      </section>
+
       {/* Features Section */}
-      <section className="py-20 px-4 bg-white/50">
-        <div className="container mx-auto max-w-6xl">
+      <section className="px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Everything You Need to Excel</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our comprehensive platform combines AI technology with proven learning methods to help you achieve
-              academic success.
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Everything You Need to Excel</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Comprehensive tools powered by AI to help you study smarter, not harder.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="border-2 border-blue-100 hover:border-blue-200 transition-all duration-300 hover:shadow-lg">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader>
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center mb-4">
-                  <Brain className="h-6 w-6 text-white" />
-                </div>
-                <CardTitle className="text-xl">AI Study Assistant</CardTitle>
+                <Brain className="h-12 w-12 text-blue-600 mb-4" />
+                <CardTitle>AI Tutor</CardTitle>
                 <CardDescription>
-                  Get instant help with homework, explanations, and personalized study recommendations powered by
-                  advanced AI.
+                  Get instant help with personalized explanations and step-by-step solutions
                 </CardDescription>
               </CardHeader>
             </Card>
 
-            <Card className="border-2 border-green-100 hover:border-green-200 transition-all duration-300 hover:shadow-lg">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader>
-                <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-500 rounded-lg flex items-center justify-center mb-4">
-                  <Target className="h-6 w-6 text-white" />
-                </div>
-                <CardTitle className="text-xl">Personalized Learning Paths</CardTitle>
+                <Calendar className="h-12 w-12 text-green-600 mb-4" />
+                <CardTitle>Smart Scheduling</CardTitle>
                 <CardDescription>
-                  AI-curated study plans that adapt to your learning style, pace, and academic goals for maximum
-                  efficiency.
+                  AI-optimized study schedules that adapt to your learning pace and deadlines
                 </CardDescription>
               </CardHeader>
             </Card>
 
-            <Card className="border-2 border-purple-100 hover:border-purple-200 transition-all duration-300 hover:shadow-lg">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader>
-                <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center mb-4">
-                  <Lightbulb className="h-6 w-6 text-white" />
-                </div>
-                <CardTitle className="text-xl">Smart Flashcards</CardTitle>
-                <CardDescription>
-                  Spaced repetition flashcards that adapt to your memory patterns and optimize retention for long-term
-                  learning.
-                </CardDescription>
+                <Users className="h-12 w-12 text-purple-600 mb-4" />
+                <CardTitle>Study Groups</CardTitle>
+                <CardDescription>Connect with classmates and form collaborative study groups</CardDescription>
               </CardHeader>
             </Card>
 
-            <Card className="border-2 border-orange-100 hover:border-orange-200 transition-all duration-300 hover:shadow-lg">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader>
-                <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center mb-4">
-                  <Clock className="h-6 w-6 text-white" />
-                </div>
-                <CardTitle className="text-xl">Smart Scheduling</CardTitle>
-                <CardDescription>
-                  AI-optimized study schedules that balance your coursework, deadlines, and personal commitments.
-                </CardDescription>
+                <BookOpen className="h-12 w-12 text-orange-600 mb-4" />
+                <CardTitle>Smart Flashcards</CardTitle>
+                <CardDescription>Spaced repetition flashcards that adapt to your memory patterns</CardDescription>
               </CardHeader>
             </Card>
 
-            <Card className="border-2 border-teal-100 hover:border-teal-200 transition-all duration-300 hover:shadow-lg">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader>
-                <div className="w-12 h-12 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-lg flex items-center justify-center mb-4">
-                  <Users className="h-6 w-6 text-white" />
-                </div>
-                <CardTitle className="text-xl">Study Community</CardTitle>
-                <CardDescription>
-                  Connect with peers, join study groups, and collaborate on projects in a supportive learning
-                  environment.
-                </CardDescription>
+                <Target className="h-12 w-12 text-red-600 mb-4" />
+                <CardTitle>Goal Tracking</CardTitle>
+                <CardDescription>Set and track academic goals with detailed progress analytics</CardDescription>
               </CardHeader>
             </Card>
 
-            <Card className="border-2 border-indigo-100 hover:border-indigo-200 transition-all duration-300 hover:shadow-lg">
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
               <CardHeader>
-                <div className="w-12 h-12 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-lg flex items-center justify-center mb-4">
-                  <TrendingUp className="h-6 w-6 text-white" />
-                </div>
-                <CardTitle className="text-xl">Progress Analytics</CardTitle>
-                <CardDescription>
-                  Track your learning progress with detailed analytics and insights to identify strengths and areas for
-                  improvement.
-                </CardDescription>
+                <Zap className="h-12 w-12 text-yellow-600 mb-4" />
+                <CardTitle>Quick Answers</CardTitle>
+                <CardDescription>Instant answers to your questions with AI-powered explanations</CardDescription>
               </CardHeader>
             </Card>
           </div>
@@ -155,62 +116,56 @@ export default function HomePage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-        <div className="container mx-auto max-w-6xl text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Trusted by Students Worldwide</h2>
-          <p className="text-xl mb-12 opacity-90">
-            Join thousands of students who have transformed their academic journey
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <section className="bg-blue-600 px-4 py-16 text-white sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-8 md:grid-cols-4">
             <div className="text-center">
-              <div className="text-5xl font-bold mb-2">50K+</div>
-              <div className="text-xl opacity-90">Active Students</div>
+              <div className="text-4xl font-bold mb-2">50K+</div>
+              <div className="text-blue-100">Active Students</div>
             </div>
             <div className="text-center">
-              <div className="text-5xl font-bold mb-2">95%</div>
-              <div className="text-xl opacity-90">Improved Grades</div>
+              <div className="text-4xl font-bold mb-2">95%</div>
+              <div className="text-blue-100">Grade Improvement</div>
             </div>
             <div className="text-center">
-              <div className="text-5xl font-bold mb-2">1M+</div>
-              <div className="text-xl opacity-90">Study Sessions</div>
+              <div className="text-4xl font-bold mb-2">1M+</div>
+              <div className="text-blue-100">Questions Answered</div>
             </div>
             <div className="text-center">
-              <div className="text-5xl font-bold mb-2">24/7</div>
-              <div className="text-xl opacity-90">AI Support</div>
+              <div className="text-4xl font-bold mb-2">24/7</div>
+              <div className="text-blue-100">AI Support</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 px-4 bg-white">
-        <div className="container mx-auto max-w-6xl">
+      <section className="px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">What Students Are Saying</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              See how TimeWiseAI is transforming the way students learn and succeed.
-            </p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Loved by Students Worldwide</h2>
+            <p className="text-lg text-gray-600">See how TimeWise AI is transforming academic success</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid gap-8 md:grid-cols-3">
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
-                <div className="flex text-yellow-400 mb-4">
+                <div className="flex mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-current" />
+                    <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
                 <p className="text-gray-600 mb-4">
-                  "TimeWiseAI helped me improve my GPA from 2.8 to 3.7 in just one semester. The AI tutor is
-                  incredible!"
+                  "TimeWise AI helped me improve my GPA from 2.8 to 3.7 in just one semester. The personalized study
+                  plans are incredible!"
                 </p>
                 <div className="flex items-center">
-                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                    <span className="text-blue-600 font-semibold">SC</span>
-                  </div>
+                  <Avatar className="h-10 w-10 mr-3">
+                    <AvatarImage src="/placeholder.svg?height=40&width=40" />
+                    <AvatarFallback>SM</AvatarFallback>
+                  </Avatar>
                   <div>
-                    <div className="font-medium text-gray-900">Sarah Chen</div>
+                    <div className="font-semibold">Sarah Martinez</div>
                     <div className="text-sm text-gray-500">Computer Science, MIT</div>
                   </div>
                 </div>
@@ -219,21 +174,23 @@ export default function HomePage() {
 
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
-                <div className="flex text-yellow-400 mb-4">
+                <div className="flex mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-current" />
+                    <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
                 <p className="text-gray-600 mb-4">
-                  "The study groups feature connected me with amazing classmates. We aced our final project together!"
+                  "The AI tutor is like having a personal teacher available 24/7. It explains complex concepts in ways I
+                  actually understand."
                 </p>
                 <div className="flex items-center">
-                  <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
-                    <span className="text-purple-600 font-semibold">MJ</span>
-                  </div>
+                  <Avatar className="h-10 w-10 mr-3">
+                    <AvatarImage src="/placeholder.svg?height=40&width=40" />
+                    <AvatarFallback>JD</AvatarFallback>
+                  </Avatar>
                   <div>
-                    <div className="font-medium text-gray-900">Marcus Johnson</div>
-                    <div className="text-sm text-gray-500">Business, Stanford</div>
+                    <div className="font-semibold">James Davis</div>
+                    <div className="text-sm text-gray-500">Pre-Med, Stanford</div>
                   </div>
                 </div>
               </CardContent>
@@ -241,150 +198,25 @@ export default function HomePage() {
 
             <Card className="border-0 shadow-lg">
               <CardContent className="p-6">
-                <div className="flex text-yellow-400 mb-4">
+                <div className="flex mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-current" />
+                    <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
                 <p className="text-gray-600 mb-4">
-                  "Smart scheduling saved me hours every week. I finally have time for both studies and social life!"
+                  "Study groups feature helped me connect with amazing classmates. We've been studying together for
+                  months now!"
                 </p>
                 <div className="flex items-center">
-                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
-                    <span className="text-green-600 font-semibold">ER</span>
-                  </div>
+                  <Avatar className="h-10 w-10 mr-3">
+                    <AvatarImage src="/placeholder.svg?height=40&width=40" />
+                    <AvatarFallback>AL</AvatarFallback>
+                  </Avatar>
                   <div>
-                    <div className="font-medium text-gray-900">Emma Rodriguez</div>
-                    <div className="text-sm text-gray-500">Pre-Med, Harvard</div>
+                    <div className="font-semibold">Alex Liu</div>
+                    <div className="text-sm text-gray-500">Engineering, UC Berkeley</div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section className="py-20 px-4 bg-gray-50">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Choose Your Learning Journey</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Start free and upgrade as you grow. All plans include our core AI features.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {/* Free Plan */}
-            <Card className="border-2 border-gray-200 hover:border-gray-300 transition-all duration-300">
-              <CardHeader className="text-center">
-                <CardTitle className="text-2xl">Free</CardTitle>
-                <div className="text-4xl font-bold text-gray-900 mb-2">$0</div>
-                <CardDescription>Perfect for getting started</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 mb-6">
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                    <span>Basic AI study assistant</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                    <span>5 flashcard decks</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                    <span>Basic scheduling</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                    <span>Community access</span>
-                  </li>
-                </ul>
-                <Link href="/dashboard">
-                  <Button className="w-full bg-transparent" variant="outline">
-                    Get Started Free
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-
-            {/* Pro Plan */}
-            <Card className="border-2 border-blue-300 hover:border-blue-400 transition-all duration-300 relative">
-              <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                <Badge className="bg-gradient-to-r from-blue-500 to-purple-500 text-white">Most Popular</Badge>
-              </div>
-              <CardHeader className="text-center">
-                <CardTitle className="text-2xl">Pro</CardTitle>
-                <div className="text-4xl font-bold text-gray-900 mb-2">$9.99</div>
-                <CardDescription>For serious students</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 mb-6">
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                    <span>Advanced AI tutoring</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                    <span>Unlimited flashcards</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                    <span>Personalized learning paths</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                    <span>Priority support</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                    <span>Progress analytics</span>
-                  </li>
-                </ul>
-                <Link href="/subscribe">
-                  <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600">
-                    Upgrade to Pro
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-
-            {/* Ultimate Plan */}
-            <Card className="border-2 border-purple-300 hover:border-purple-400 transition-all duration-300">
-              <CardHeader className="text-center">
-                <CardTitle className="text-2xl">Ultimate</CardTitle>
-                <div className="text-4xl font-bold text-gray-900 mb-2">$19.99</div>
-                <CardDescription>For academic excellence</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 mb-6">
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                    <span>Everything in Pro</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                    <span>1-on-1 AI tutoring sessions</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                    <span>Career path guidance</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                    <span>Advanced analytics</span>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                    <span>Priority everything</span>
-                  </li>
-                </ul>
-                <Link href="/subscribe">
-                  <Button className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
-                    Go Ultimate
-                  </Button>
-                </Link>
               </CardContent>
             </Card>
           </div>
@@ -392,74 +224,62 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-blue-600 to-purple-600">
-        <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Ready to Transform Your Studies?</h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            Join thousands of students who are already achieving better grades and building successful careers with
-            TimeWiseAI.
+      <section className="bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-16 text-white sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl text-center">
+          <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Academic Journey?</h2>
+          <p className="text-xl mb-8 text-blue-100">
+            Join thousands of students who are already achieving their academic goals with TimeWise AI.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/dashboard">
-              <Button
-                size="lg"
-                className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-xl font-semibold text-lg"
-              >
-                <Star className="mr-2 h-5 w-5" />
-                Start Your Journey
-              </Button>
-            </Link>
-            <Link href="/ai-assistant">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-xl font-semibold text-lg bg-transparent"
-              >
-                <Brain className="mr-2 h-5 w-5" />
-                Try AI Assistant
-              </Button>
-            </Link>
+          <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
+            <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
+              Get Started Free
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-white text-white hover:bg-white hover:text-blue-600 bg-transparent"
+            >
+              Schedule Demo
+            </Button>
           </div>
+          <p className="mt-4 text-sm text-blue-200">Free to start • Cancel anytime</p>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-16 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <footer className="bg-gray-900 px-4 py-12 text-white sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-8 md:grid-cols-4">
             <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
-                  <Brain className="h-5 w-5 text-white" />
-                </div>
-                <span className="text-xl font-bold">TimeWiseAI</span>
+              <div className="flex items-center mb-4">
+                <Brain className="h-8 w-8 text-blue-400 mr-2" />
+                <span className="text-xl font-bold">TimeWise AI</span>
               </div>
-              <p className="text-gray-400 mb-4">
-                Empowering students with AI-powered learning tools for academic success.
-              </p>
+              <p className="text-gray-400">Empowering students with AI-driven learning tools for academic success.</p>
             </div>
 
             <div>
-              <h3 className="font-semibold mb-4">Features</h3>
+              <h3 className="font-semibold mb-4">Product</h3>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <Link href="/ai-assistant" className="hover:text-white transition-colors">
-                    AI Assistant
+                  <Link href="/ai-assistant" className="hover:text-white">
+                    AI Tutor
                   </Link>
                 </li>
                 <li>
-                  <Link href="/flashcards" className="hover:text-white transition-colors">
-                    Smart Flashcards
+                  <Link href="/calendar" className="hover:text-white">
+                    Smart Calendar
                   </Link>
                 </li>
                 <li>
-                  <Link href="/learn" className="hover:text-white transition-colors">
-                    Learning Paths
+                  <Link href="/study-groups" className="hover:text-white">
+                    Study Groups
                   </Link>
                 </li>
                 <li>
-                  <Link href="/community" className="hover:text-white transition-colors">
-                    Study Community
+                  <Link href="/flashcards" className="hover:text-white">
+                    Flashcards
                   </Link>
                 </li>
               </ul>
@@ -469,23 +289,23 @@ export default function HomePage() {
               <h3 className="font-semibold mb-4">Resources</h3>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <Link href="/dashboard" className="hover:text-white transition-colors">
-                    Dashboard
+                  <Link href="/learn" className="hover:text-white">
+                    Learning Paths
                   </Link>
                 </li>
                 <li>
-                  <Link href="/calendar" className="hover:text-white transition-colors">
-                    Calendar
+                  <Link href="/community" className="hover:text-white">
+                    Community
                   </Link>
                 </li>
                 <li>
-                  <Link href="/grades" className="hover:text-white transition-colors">
-                    Grades
+                  <Link href="/career" className="hover:text-white">
+                    Career Center
                   </Link>
                 </li>
                 <li>
-                  <Link href="/career" className="hover:text-white transition-colors">
-                    Career Guidance
+                  <Link href="/mobile-app" className="hover:text-white">
+                    Mobile App
                   </Link>
                 </li>
               </ul>
@@ -495,31 +315,31 @@ export default function HomePage() {
               <h3 className="font-semibold mb-4">Company</h3>
               <ul className="space-y-2 text-gray-400">
                 <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    About Us
-                  </a>
+                  <Link href="/about" className="hover:text-white">
+                    About
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition-colors">
+                  <Link href="/contact" className="hover:text-white">
                     Contact
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Privacy Policy
-                  </a>
+                  <Link href="/privacy" className="hover:text-white">
+                    Privacy
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition-colors">
-                    Terms of Service
-                  </a>
+                  <Link href="/terms" className="hover:text-white">
+                    Terms
+                  </Link>
                 </li>
               </ul>
             </div>
           </div>
 
-          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 TimeWiseAI. All rights reserved. Built with ❤️ for students worldwide.</p>
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2024 TimeWise AI. All rights reserved.</p>
           </div>
         </div>
       </footer>
