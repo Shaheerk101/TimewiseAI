@@ -18,11 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-sans antialiased">
-        {/* Navigation */}
         <nav className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-50">
           <div className="container mx-auto px-4 py-3">
             <div className="flex items-center justify-between">
-              {/* Logo - Single Instance */}
               <Link href="/" className="flex items-center space-x-2">
                 <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
                   <Brain className="h-5 w-5 text-white" />
@@ -32,7 +30,6 @@ export default function RootLayout({
                 </span>
               </Link>
 
-              {/* Navigation Links */}
               <div className="hidden md:flex items-center space-x-1">
                 <Link
                   href="/dashboard"
@@ -85,7 +82,6 @@ export default function RootLayout({
                 </Link>
               </div>
 
-              {/* Mobile Menu Button */}
               <div className="md:hidden">
                 <button className="p-2 rounded-md text-gray-600 hover:text-blue-600 hover:bg-blue-50">
                   <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
