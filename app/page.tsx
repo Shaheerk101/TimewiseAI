@@ -149,15 +149,7 @@ export default function HomePage() {
             <div className="flex items-center justify-center space-x-6 text-sm text-gray-500">
               <div className="flex items-center">
                 <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                Free to start
-              </div>
-              <div className="flex items-center">
-                <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                No credit card required
-              </div>
-              <div className="flex items-center">
-                <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
-                Cancel anytime
+                Free to start • Cancel anytime
               </div>
             </div>
           </div>
