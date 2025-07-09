@@ -1,13 +1,12 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { openai, isOpenAIConfigured } from "@/lib/openai"
+import OpenAI from "openai"
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY || process.env.openaisecretkey,
+})
 
 export async function POST(request: NextRequest) {
   try {
-    // Check if OpenAI is properly configured
-    if (!isOpenAIConfigured()) {
-      return NextResponse.json({ error: "AI service is not configured. Please contact support." }, { status: 503 })
-    }
-
     const { message } = await request.json()
 
     if (!message) {
@@ -20,7 +19,7 @@ export async function POST(request: NextRequest) {
         {
           role: "system",
           content:
-            "You are a helpful AI study assistant. Help students with their academic questions, provide explanations, and offer study tips. Be encouraging and supportive.",
+            "You are a helpful AI tutor assistant. Help students with their studies by providing clear explanations, step-by-step solutions, and study guidance. Be encouraging and educational.",
         },
         {
           role: "user",
@@ -31,17 +30,12 @@ export async function POST(request: NextRequest) {
       temperature: 0.7,
     })
 
-    const response = completion.choices[0]?.message?.content || "I'm sorry, I couldn't generate a response."
+    const response =
+      completion.choices[0]?.message?.content || "I'm sorry, I couldn't generate a response. Please try again."
 
     return NextResponse.json({ response })
   } catch (error) {
     console.error("OpenAI API error:", error)
-
-    // Handle specific OpenAI errors
-    if (error instanceof Error && error.message.includes("API key")) {
-      return NextResponse.json({ error: "AI service configuration error. Please contact support." }, { status: 503 })
-    }
-
-    return NextResponse.json({ error: "Failed to get AI response. Please try again later." }, { status: 500 })
+    return NextResponse.json({ error: "Failed to get AI response" }, { status: 500 })
   }
 }
