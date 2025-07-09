@@ -1,11 +1,12 @@
 import OpenAI from "openai"
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY || process.env.openaisecretkey,
+// Create OpenAI client with proper error handling
+export const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY || process.env.openaisecretkey || "dummy-key-for-build",
 })
 
-export { openai }
-
+// Helper function to check if OpenAI is properly configured
 export function isOpenAIConfigured(): boolean {
-  return !!(process.env.OPENAI_API_KEY || process.env.openaisecretkey)
+  const apiKey = process.env.OPENAI_API_KEY || process.env.openaisecretkey
+  return !!apiKey && apiKey !== "dummy-key-for-build"
 }

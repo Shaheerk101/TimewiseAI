@@ -23,41 +23,18 @@ export default function AIAssistantPage() {
 
     const userMessage = { role: "user", content: message }
     setMessages((prev) => [...prev, userMessage])
-    const currentMessage = message
     setMessage("")
     setIsLoading(true)
 
-    try {
-      const response = await fetch("/api/ai/study-help", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ message: currentMessage }),
-      })
-
-      if (!response.ok) {
-        throw new Error("Failed to get AI response")
-      }
-
-      const data = await response.json()
-
+    // Simulate AI response - replace with actual API call
+    setTimeout(() => {
       const aiResponse = {
         role: "assistant",
-        content: data.response || "I'm sorry, I couldn't process that request. Please try again.",
+        content: "I understand you need help with that topic. Let me break it down for you step by step...",
       }
-
       setMessages((prev) => [...prev, aiResponse])
-    } catch (error) {
-      console.error("Error:", error)
-      const errorMessage = {
-        role: "assistant",
-        content: "I'm sorry, I'm having trouble connecting right now. Please try again later.",
-      }
-      setMessages((prev) => [...prev, errorMessage])
-    } finally {
       setIsLoading(false)
-    }
+    }, 1000)
   }
 
   const quickActions = [
@@ -65,25 +42,25 @@ export default function AIAssistantPage() {
       icon: BookOpen,
       title: "Explain Concept",
       description: "Get clear explanations of complex topics",
-      prompt: "Can you explain the concept of photosynthesis?",
+      prompt: "Can you explain the concept of...",
     },
     {
       icon: Calculator,
       title: "Solve Problem",
       description: "Step-by-step problem solving",
-      prompt: "Help me solve this algebra problem: 2x + 5 = 15",
+      prompt: "Help me solve this problem: ",
     },
     {
       icon: Lightbulb,
       title: "Study Tips",
       description: "Get personalized study strategies",
-      prompt: "Give me study tips for preparing for exams",
+      prompt: "Give me study tips for...",
     },
     {
       icon: Clock,
       title: "Create Schedule",
       description: "Plan your study time effectively",
-      prompt: "Help me create a study schedule for finals week",
+      prompt: "Help me create a study schedule for...",
     },
   ]
 
@@ -138,7 +115,7 @@ export default function AIAssistantPage() {
                         msg.role === "user" ? "bg-blue-600 text-white" : "bg-gray-100 text-gray-900"
                       }`}
                     >
-                      <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
+                      <p className="text-sm">{msg.content}</p>
                     </div>
                   </div>
                 ))}
@@ -167,7 +144,7 @@ export default function AIAssistantPage() {
                   placeholder="Ask me anything about your studies..."
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  onKeyPress={(e) => e.key === "Enter" && !e.shiftKey && handleSendMessage()}
+                  onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
                   className="flex-1"
                 />
                 <Button
