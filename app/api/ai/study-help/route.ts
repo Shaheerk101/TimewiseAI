@@ -1,47 +1,31 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { openai, isOpenAIConfigured } from "@/lib/openai"
+import { generateText } from "ai"
+import { openai } from "@ai-sdk/openai"
 
 export async function POST(request: NextRequest) {
   try {
-    // Check if OpenAI is properly configured
-    if (!isOpenAIConfigured()) {
-      return NextResponse.json({ error: "AI service is not configured. Please contact support." }, { status: 503 })
-    }
-
-    const { message } = await request.json()
+    const { message, context } = await request.json()
 
     if (!message) {
       return NextResponse.json({ error: "Message is required" }, { status: 400 })
     }
 
-    const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [
-        {
-          role: "system",
-          content:
-            "You are a helpful AI study assistant. Help students with their academic questions, provide explanations, and offer study tips. Be encouraging and supportive.",
-        },
-        {
-          role: "user",
-          content: message,
-        },
-      ],
-      max_tokens: 500,
-      temperature: 0.7,
+    const { text } = await generateText({
+      model: openai("gpt-4o"),
+      system: `You are a helpful AI tutor assistant. You help students with their studies by:
+      - Explaining complex concepts in simple terms
+      - Providing step-by-step solutions to problems
+      - Creating study plans and schedules
+      - Answering academic questions across various subjects
+      - Offering study tips and learning strategies
+      
+      Be encouraging, patient, and educational in your responses. Always aim to help the student learn and understand rather than just providing answers.`,
+      prompt: message,
     })
 
-    const response = completion.choices[0]?.message?.content || "I'm sorry, I couldn't generate a response."
-
-    return NextResponse.json({ response })
+    return NextResponse.json({ response: text })
   } catch (error) {
-    console.error("OpenAI API error:", error)
-
-    // Handle specific OpenAI errors
-    if (error instanceof Error && error.message.includes("API key")) {
-      return NextResponse.json({ error: "AI service configuration error. Please contact support." }, { status: 503 })
-    }
-
-    return NextResponse.json({ error: "Failed to get AI response. Please try again later." }, { status: 500 })
+    console.error("AI API Error:", error)
+    return NextResponse.json({ error: "Failed to generate AI response" }, { status: 500 })
   }
 }

@@ -2,338 +2,375 @@
 
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import {
-  BookOpen,
+  Brain,
   Calendar,
-  TrendingUp,
+  BookOpen,
   Target,
+  TrendingUp,
   Clock,
   Users,
-  Brain,
   Award,
-  ChevronRight,
   Plus,
-  FlameIcon as Fire,
-  Star,
+  ArrowRight,
+  CheckCircle,
+  AlertCircle,
 } from "lucide-react"
 import Link from "next/link"
 
-export default function StudentDashboard() {
-  const [studyStreak, setStudyStreak] = useState(7)
-  const [weeklyGoal, setWeeklyGoal] = useState(75)
-  const [currentProgress, setCurrentProgress] = useState(68)
+export default function DashboardPage() {
+  const [activeTab, setActiveTab] = useState("overview")
 
-  // Mock data - replace with real data from your backend
-  const studentData = {
-    name: "Alex Johnson",
-    gpa: 3.7,
-    totalStudyHours: 142,
-    coursesEnrolled: 5,
-    upcomingSessions: 3,
-    achievements: 12,
+  const upcomingTasks = [
+    { id: 1, title: "Math Assignment Due", subject: "Calculus", dueDate: "Today", priority: "high" },
+    { id: 2, title: "History Essay", subject: "World History", dueDate: "Tomorrow", priority: "medium" },
+    { id: 3, title: "Chemistry Lab Report", subject: "Chemistry", dueDate: "Friday", priority: "low" },
+  ]
+
+  const recentActivity = [
+    { id: 1, action: "Completed Biology Quiz", time: "2 hours ago", score: "95%" },
+    { id: 2, action: "Studied with AI Tutor", time: "4 hours ago", topic: "Derivatives" },
+    { id: 3, action: "Joined Study Group", time: "1 day ago", subject: "Physics" },
+  ]
+
+  const studyStats = {
+    totalHours: 47,
+    weeklyGoal: 50,
+    streak: 12,
+    completedTasks: 23,
   }
-
-  const recentCourses = [
-    { name: "Calculus II", grade: "A-", progress: 85, nextAssignment: "Problem Set 7", dueDate: "Tomorrow" },
-    { name: "Computer Science", grade: "B+", progress: 78, nextAssignment: "Final Project", dueDate: "Dec 15" },
-    { name: "Physics", grade: "A", progress: 92, nextAssignment: "Lab Report", dueDate: "Friday" },
-    { name: "Chemistry", grade: "B", progress: 71, nextAssignment: "Midterm Exam", dueDate: "Next Week" },
-  ]
-
-  const upcomingEvents = [
-    { type: "Tutoring", subject: "Math", time: "2:00 PM", tutor: "Sarah Chen" },
-    { type: "Study Group", subject: "Physics", time: "4:30 PM", members: 4 },
-    { type: "AI Session", subject: "Chemistry", time: "7:00 PM", topic: "Organic Reactions" },
-  ]
-
-  const studyInsights = [
-    { metric: "Most Productive Time", value: "2-4 PM", trend: "+15%" },
-    { metric: "Favorite Subject", value: "Mathematics", trend: "45 hrs" },
-    { metric: "Study Efficiency", value: "87%", trend: "+12%" },
-    { metric: "Weekly Average", value: "18.5 hrs", trend: "+3.2 hrs" },
-  ]
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">Welcome back, {studentData.name}! 👋</h1>
-              <p className="text-gray-600">Here's your academic progress overview</p>
-            </div>
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2 bg-orange-100 px-3 py-2 rounded-full">
-                <Fire className="h-4 w-4 text-orange-600" />
-                <span className="text-sm font-semibold text-orange-800">{studyStreak} day streak!</span>
-              </div>
-              <Link href="/ai-assistant">
-                <Button className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600">
-                  <Brain className="h-4 w-4 mr-2" />
-                  Ask AI
-                </Button>
-              </Link>
-            </div>
-          </div>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome back, Alex!</h1>
+          <p className="text-gray-600">Here's your learning progress and upcoming tasks.</p>
         </div>
 
-        {/* Quick Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
-          <Card className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
-            <CardContent className="p-4 text-center">
-              <TrendingUp className="h-6 w-6 mx-auto mb-2" />
-              <div className="text-2xl font-bold">{studentData.gpa}</div>
-              <div className="text-xs opacity-90">Current GPA</div>
-            </CardContent>
-          </Card>
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+          <TabsList className="grid w-full grid-cols-4">
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="courses">Courses</TabsTrigger>
+            <TabsTrigger value="progress">Progress</TabsTrigger>
+            <TabsTrigger value="goals">Goals</TabsTrigger>
+          </TabsList>
 
-          <Card className="bg-gradient-to-r from-green-500 to-green-600 text-white">
-            <CardContent className="p-4 text-center">
-              <Clock className="h-6 w-6 mx-auto mb-2" />
-              <div className="text-2xl font-bold">{studentData.totalStudyHours}</div>
-              <div className="text-xs opacity-90">Study Hours</div>
-            </CardContent>
-          </Card>
+          <TabsContent value="overview" className="space-y-6">
+            {/* Stats Cards */}
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">Study Hours</CardTitle>
+                  <Clock className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{studyStats.totalHours}h</div>
+                  <p className="text-xs text-muted-foreground">
+                    {studyStats.weeklyGoal - studyStats.totalHours}h to weekly goal
+                  </p>
+                  <Progress value={(studyStats.totalHours / studyStats.weeklyGoal) * 100} className="mt-2" />
+                </CardContent>
+              </Card>
 
-          <Card className="bg-gradient-to-r from-purple-500 to-purple-600 text-white">
-            <CardContent className="p-4 text-center">
-              <BookOpen className="h-6 w-6 mx-auto mb-2" />
-              <div className="text-2xl font-bold">{studentData.coursesEnrolled}</div>
-              <div className="text-xs opacity-90">Active Courses</div>
-            </CardContent>
-          </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">Study Streak</CardTitle>
+                  <TrendingUp className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{studyStats.streak} days</div>
+                  <p className="text-xs text-muted-foreground">Keep it up!</p>
+                </CardContent>
+              </Card>
 
-          <Card className="bg-gradient-to-r from-orange-500 to-orange-600 text-white">
-            <CardContent className="p-4 text-center">
-              <Users className="h-6 w-6 mx-auto mb-2" />
-              <div className="text-2xl font-bold">{studentData.upcomingSessions}</div>
-              <div className="text-xs opacity-90">Upcoming Sessions</div>
-            </CardContent>
-          </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">Completed Tasks</CardTitle>
+                  <CheckCircle className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{studyStats.completedTasks}</div>
+                  <p className="text-xs text-muted-foreground">This month</p>
+                </CardContent>
+              </Card>
 
-          <Card className="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white">
-            <CardContent className="p-4 text-center">
-              <Award className="h-6 w-6 mx-auto mb-2" />
-              <div className="text-2xl font-bold">{studentData.achievements}</div>
-              <div className="text-xs opacity-90">Achievements</div>
-            </CardContent>
-          </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">AI Sessions</CardTitle>
+                  <Brain className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">15</div>
+                  <p className="text-xs text-muted-foreground">This week</p>
+                </CardContent>
+              </Card>
+            </div>
 
-          <Card className="bg-gradient-to-r from-pink-500 to-pink-600 text-white">
-            <CardContent className="p-4 text-center">
-              <Fire className="h-6 w-6 mx-auto mb-2" />
-              <div className="text-2xl font-bold">{studyStreak}</div>
-              <div className="text-xs opacity-90">Day Streak</div>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Left Column */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Weekly Goal Progress */}
-            <Card>
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle className="flex items-center">
-                      <Target className="h-5 w-5 mr-2 text-blue-600" />
-                      Weekly Study Goal
-                    </CardTitle>
-                    <CardDescription>You're doing great! Keep it up!</CardDescription>
-                  </div>
-                  <Badge variant="outline" className="text-blue-600 border-blue-200">
-                    {Math.round((currentProgress / weeklyGoal) * 100)}% Complete
-                  </Badge>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex justify-between text-sm">
-                    <span>{currentProgress} hours completed</span>
-                    <span>{weeklyGoal} hours goal</span>
-                  </div>
-                  <Progress value={(currentProgress / weeklyGoal) * 100} className="h-3" />
-                  <div className="text-sm text-gray-600">
-                    {weeklyGoal - currentProgress} hours remaining • {7 - new Date().getDay()} days left
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Course Progress */}
-            <Card>
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle>Course Progress</CardTitle>
-                  <Link href="/grades">
-                    <Button variant="outline" size="sm">
-                      View All <ChevronRight className="h-4 w-4 ml-1" />
-                    </Button>
-                  </Link>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {recentCourses.map((course, index) => (
-                    <div key={index} className="border rounded-lg p-4 hover:bg-gray-50 transition-colors">
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
-                            <BookOpen className="h-5 w-5 text-white" />
-                          </div>
-                          <div>
-                            <h3 className="font-semibold">{course.name}</h3>
-                            <p className="text-sm text-gray-600">Next: {course.nextAssignment}</p>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <Badge variant="outline" className="mb-1">
-                            {course.grade}
-                          </Badge>
-                          <div className="text-xs text-gray-500">Due {course.dueDate}</div>
-                        </div>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <Progress value={course.progress} className="flex-1 h-2" />
-                        <span className="text-sm font-medium">{course.progress}%</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Study Insights */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <TrendingUp className="h-5 w-5 mr-2 text-green-600" />
-                  Study Insights
-                </CardTitle>
-                <CardDescription>AI-powered analysis of your study patterns</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {studyInsights.map((insight, index) => (
-                    <div key={index} className="bg-gray-50 rounded-lg p-4">
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-sm text-gray-600">{insight.metric}</span>
-                        <Badge variant="outline" className="text-green-600 border-green-200">
-                          {insight.trend}
-                        </Badge>
-                      </div>
-                      <div className="text-lg font-semibold">{insight.value}</div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Right Column */}
-          <div className="space-y-6">
-            {/* Today's Schedule */}
-            <Card>
-              <CardHeader>
-                <div className="flex items-center justify-between">
+            <div className="grid gap-6 md:grid-cols-2">
+              {/* Upcoming Tasks */}
+              <Card>
+                <CardHeader>
                   <CardTitle className="flex items-center">
-                    <Calendar className="h-5 w-5 mr-2 text-purple-600" />
-                    Today's Schedule
+                    <Target className="h-5 w-5 mr-2" />
+                    Upcoming Tasks
                   </CardTitle>
-                  <Link href="/calendar">
-                    <Button variant="ghost" size="sm">
-                      <Plus className="h-4 w-4" />
-                    </Button>
-                  </Link>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {upcomingEvents.map((event, index) => (
-                    <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                      <div className="flex-1">
-                        <div className="font-medium text-sm">{event.type}</div>
-                        <div className="text-xs text-gray-600">
-                          {event.subject} • {event.time}
+                  <CardDescription>Your assignments and deadlines</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {upcomingTasks.map((task) => (
+                      <div key={task.id} className="flex items-center justify-between p-3 border rounded-lg">
+                        <div className="flex items-center space-x-3">
+                          <AlertCircle
+                            className={`h-4 w-4 ${
+                              task.priority === "high"
+                                ? "text-red-500"
+                                : task.priority === "medium"
+                                  ? "text-yellow-500"
+                                  : "text-green-500"
+                            }`}
+                          />
+                          <div>
+                            <p className="font-medium text-sm">{task.title}</p>
+                            <p className="text-xs text-gray-500">{task.subject}</p>
+                          </div>
                         </div>
-                        {event.tutor && <div className="text-xs text-gray-500">with {event.tutor}</div>}
-                        {event.members && <div className="text-xs text-gray-500">{event.members} members</div>}
+                        <Badge variant={task.priority === "high" ? "destructive" : "secondary"}>{task.dueDate}</Badge>
                       </div>
-                    </div>
-                  ))}
-                  <Link href="/calendar">
-                    <Button variant="outline" className="w-full mt-3 bg-transparent" size="sm">
-                      View Full Calendar
-                    </Button>
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
+                    ))}
+                  </div>
+                  <Button className="w-full mt-4 bg-transparent" variant="outline">
+                    <Plus className="h-4 w-4 mr-2" />
+                    Add Task
+                  </Button>
+                </CardContent>
+              </Card>
+
+              {/* Recent Activity */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <BookOpen className="h-5 w-5 mr-2" />
+                    Recent Activity
+                  </CardTitle>
+                  <CardDescription>Your latest learning activities</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {recentActivity.map((activity) => (
+                      <div key={activity.id} className="flex items-start space-x-3">
+                        <Avatar className="h-8 w-8">
+                          <AvatarFallback>
+                            <CheckCircle className="h-4 w-4" />
+                          </AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1">
+                          <p className="text-sm font-medium">{activity.action}</p>
+                          <p className="text-xs text-gray-500">{activity.time}</p>
+                          {activity.score && (
+                            <Badge className="mt-1" variant="secondary">
+                              {activity.score}
+                            </Badge>
+                          )}
+                          {activity.topic && (
+                            <Badge className="mt-1" variant="outline">
+                              {activity.topic}
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
 
             {/* Quick Actions */}
             <Card>
               <CardHeader>
                 <CardTitle>Quick Actions</CardTitle>
+                <CardDescription>Jump into your learning activities</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid gap-4 md:grid-cols-3">
                   <Link href="/ai-assistant">
-                    <Button
-                      variant="outline"
-                      className="w-full h-16 flex flex-col items-center justify-center bg-transparent"
-                    >
-                      <Brain className="h-5 w-5 mb-1" />
-                      <span className="text-xs">AI Help</span>
-                    </Button>
-                  </Link>
-                  <Link href="/peer-tutoring">
-                    <Button
-                      variant="outline"
-                      className="w-full h-16 flex flex-col items-center justify-center bg-transparent"
-                    >
-                      <Users className="h-5 w-5 mb-1" />
-                      <span className="text-xs">Find Tutor</span>
+                    <Button className="w-full h-20 flex flex-col items-center justify-center space-y-2">
+                      <Brain className="h-6 w-6" />
+                      <span>Ask AI Tutor</span>
                     </Button>
                   </Link>
                   <Link href="/study-groups">
                     <Button
                       variant="outline"
-                      className="w-full h-16 flex flex-col items-center justify-center bg-transparent"
+                      className="w-full h-20 flex flex-col items-center justify-center space-y-2 bg-transparent"
                     >
-                      <BookOpen className="h-5 w-5 mb-1" />
-                      <span className="text-xs">Study Group</span>
+                      <Users className="h-6 w-6" />
+                      <span>Join Study Group</span>
                     </Button>
                   </Link>
-                  <Link href="/grades">
+                  <Link href="/calendar">
                     <Button
                       variant="outline"
-                      className="w-full h-16 flex flex-col items-center justify-center bg-transparent"
+                      className="w-full h-20 flex flex-col items-center justify-center space-y-2 bg-transparent"
                     >
-                      <Star className="h-5 w-5 mb-1" />
-                      <span className="text-xs">Grades</span>
+                      <Calendar className="h-6 w-6" />
+                      <span>View Schedule</span>
                     </Button>
                   </Link>
                 </div>
               </CardContent>
             </Card>
+          </TabsContent>
 
-            {/* Achievement Badge */}
-            <Card className="bg-gradient-to-r from-yellow-50 to-orange-50 border-yellow-200">
-              <CardContent className="p-4 text-center">
-                <Award className="h-8 w-8 text-yellow-600 mx-auto mb-2" />
-                <h3 className="font-semibold text-yellow-800 mb-1">Study Streak Champion!</h3>
-                <p className="text-sm text-yellow-700">You've studied for 7 days straight. Keep it up!</p>
-                <Badge className="mt-2 bg-yellow-500 hover:bg-yellow-600">🔥 {studyStreak} Days</Badge>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
+          <TabsContent value="courses" className="space-y-6">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {[
+                { name: "Calculus I", progress: 75, grade: "A-", nextClass: "Tomorrow 10:00 AM" },
+                { name: "World History", progress: 60, grade: "B+", nextClass: "Today 2:00 PM" },
+                { name: "Chemistry", progress: 85, grade: "A", nextClass: "Friday 9:00 AM" },
+                { name: "Physics", progress: 45, grade: "B", nextClass: "Monday 11:00 AM" },
+              ].map((course, index) => (
+                <Card key={index}>
+                  <CardHeader>
+                    <CardTitle className="text-lg">{course.name}</CardTitle>
+                    <CardDescription>Current Grade: {course.grade}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div>
+                        <div className="flex justify-between text-sm mb-2">
+                          <span>Progress</span>
+                          <span>{course.progress}%</span>
+                        </div>
+                        <Progress value={course.progress} />
+                      </div>
+                      <div className="text-sm text-gray-600">Next class: {course.nextClass}</div>
+                      <Button className="w-full bg-transparent" variant="outline">
+                        View Details
+                        <ArrowRight className="h-4 w-4 ml-2" />
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </TabsContent>
+
+          <TabsContent value="progress" className="space-y-6">
+            <div className="grid gap-6 md:grid-cols-2">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Weekly Study Hours</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, index) => (
+                      <div key={day} className="flex items-center space-x-4">
+                        <span className="w-8 text-sm">{day}</span>
+                        <Progress value={Math.random() * 100} className="flex-1" />
+                        <span className="w-8 text-sm text-right">{Math.floor(Math.random() * 8)}h</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Subject Performance</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {[
+                      { subject: "Mathematics", score: 92 },
+                      { subject: "Science", score: 88 },
+                      { subject: "History", score: 85 },
+                      { subject: "Literature", score: 90 },
+                    ].map((item) => (
+                      <div key={item.subject} className="flex items-center justify-between">
+                        <span className="text-sm font-medium">{item.subject}</span>
+                        <div className="flex items-center space-x-2">
+                          <Progress value={item.score} className="w-20" />
+                          <span className="text-sm w-8">{item.score}%</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="goals" className="space-y-6">
+            <div className="grid gap-6 md:grid-cols-2">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Award className="h-5 w-5 mr-2" />
+                    Current Goals
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {[
+                      { goal: "Study 50 hours this week", progress: 94, target: "50h" },
+                      { goal: "Complete all assignments", progress: 75, target: "8/8" },
+                      { goal: "Maintain A average", progress: 88, target: "A-" },
+                    ].map((item, index) => (
+                      <div key={index} className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="font-medium">{item.goal}</span>
+                          <span className="text-gray-500">{item.target}</span>
+                        </div>
+                        <Progress value={item.progress} />
+                      </div>
+                    ))}
+                  </div>
+                  <Button className="w-full mt-4 bg-transparent" variant="outline">
+                    <Plus className="h-4 w-4 mr-2" />
+                    Set New Goal
+                  </Button>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Achievements</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {[
+                      { title: "7-Day Streak", description: "Studied for 7 consecutive days", earned: true },
+                      { title: "Quiz Master", description: "Scored 90%+ on 5 quizzes", earned: true },
+                      { title: "Early Bird", description: "Complete morning study sessions", earned: false },
+                      { title: "Team Player", description: "Join 3 study groups", earned: false },
+                    ].map((achievement, index) => (
+                      <div
+                        key={index}
+                        className={`flex items-center space-x-3 p-3 rounded-lg border ${
+                          achievement.earned ? "bg-green-50 border-green-200" : "bg-gray-50 border-gray-200"
+                        }`}
+                      >
+                        <Award className={`h-6 w-6 ${achievement.earned ? "text-green-600" : "text-gray-400"}`} />
+                        <div>
+                          <p className="font-medium text-sm">{achievement.title}</p>
+                          <p className="text-xs text-gray-600">{achievement.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   )
